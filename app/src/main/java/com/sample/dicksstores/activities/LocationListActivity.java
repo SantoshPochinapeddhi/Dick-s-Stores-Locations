@@ -1,7 +1,9 @@
-package com.sample.dicksstores;
+package com.sample.dicksstores.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.sample.dicksstores.R;
 
 public class LocationListActivity extends AppCompatActivity {
 
