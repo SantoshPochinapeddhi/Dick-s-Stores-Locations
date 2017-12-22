@@ -116,8 +116,6 @@ public class StoreDetailsActivity extends AppCompatActivity {
         }
 
 
-
-
         UIDialog.dismissDialog(this);
     }
 
