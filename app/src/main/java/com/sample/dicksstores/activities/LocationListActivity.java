@@ -72,20 +72,20 @@ public class LocationListActivity extends AppCompatActivity {
     private List<Venues> sortByFavs(List<Venues> venuesList) {
         SharedPreferences prefObj = PreferenceManager.getDefaultSharedPreferences(LocationListActivity.this);
 
-        List<Integer> indexes = new ArrayList<>();
+        int favIndex = -1;
         for (Venues venue : venuesList) {
-            boolean isFav = prefObj.getBoolean(venue.getId() + "", false);
-            if (isFav) {
-                indexes.add(venuesList.indexOf(venue));
+            if (venue.getId().equals(prefObj.getString("liked", ""))) {
+                favIndex = venuesList.indexOf(venue);
             }
         }
 
         List<Venues> sortedList = new ArrayList<>();
-        for(Integer i : indexes) {
-            sortedList.add(venuesList.get(i));
-        }
-        for(Venues venue:venuesList) {
-            if(!sortedList.contains(venue)) {
+
+        if (favIndex != -1)
+            sortedList.add(venuesList.get(favIndex));
+
+        for (Venues venue : venuesList) {
+            if (!sortedList.contains(venue)) {
                 sortedList.add(venue);
             }
         }
