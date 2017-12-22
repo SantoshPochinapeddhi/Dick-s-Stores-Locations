@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Dick\'s Stores</string>
+    <string name="loading">Loading</string>
+    <string name="unable_fetch_data">Unable to fetch data at this time. Please try again later</string>
 </resources>
