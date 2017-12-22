@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/name_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/location_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/city_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/pin_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/state_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/country_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:textColor="@color/colorPrimary" />
+
+</LinearLayout>
