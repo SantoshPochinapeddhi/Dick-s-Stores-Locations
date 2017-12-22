@@ -1,10 +1,25 @@
 package com.sample.dicksstores.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.sample.dicksstores.R;
+import com.sample.dicksstores.adapters.StoresAdapter;
+import com.sample.dicksstores.model.Response;
+import com.sample.dicksstores.model.Venues;
+import com.sample.dicksstores.services.rest.DicksService;
+import com.sample.dicksstores.services.rest.RestClient;
+import com.sample.dicksstores.util.NetworkUtil;
+import com.sample.dicksstores.util.UIDialog;
+
+import java.util.Arrays;
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
 
 public class LocationListActivity extends AppCompatActivity {
 
@@ -17,7 +32,38 @@ public class LocationListActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.recycler_view);
 
+        if (NetworkUtil.isOnline(this)) {
 
+            UIDialog.showUIDialog(this);
+            DicksService service = RestClient.getInstance().getDicksService();
+            service.getStores(new Callback<Response>() {
+                @Override
+                public void success(Response response, retrofit.client.Response response2) {
+                    if(response != null && response.getVenues().length > 0) {
+                        loadListWithStores(response.getVenues());
+                    } else {
+                        Toast.makeText(LocationListActivity.this, getString(R.string.unable_fetch_data), Toast.LENGTH_SHORT).show();
+                        UIDialog.dismissDialog(LocationListActivity.this);
+                    }
+                }
 
+                @Override
+                public void failure(RetrofitError error) {
+                    UIDialog.dismissDialog(LocationListActivity.this);
+                    Toast.makeText(LocationListActivity.this, getString(R.string.unable_fetch_data), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+    private void loadListWithStores(Venues[] venues) {
+        List<Venues> venuesList = Arrays.asList(venues);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(LocationListActivity.this);
+        mRecyclerView.setLayoutManager(layoutManager);
+        StoresAdapter adapter = new StoresAdapter(LocationListActivity.this);
+        adapter.addAllItems(venuesList);
+        mRecyclerView.setAdapter(adapter);
+        UIDialog.dismissDialog(LocationListActivity.this);
     }
 }
