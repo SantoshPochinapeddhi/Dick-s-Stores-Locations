@@ -64,7 +64,7 @@ public class StoreDetailsActivity extends AppCompatActivity {
         if (venue.getLocation() != null) {
             location.setText(venue.getLocation().getAddress());
             city.setText(venue.getLocation().getCity() + " - " + venue.getLocation().getPostalCode());
-            state.setText(venue.getLocation().getState() + " " + venue.getLocation().getAddress());
+            state.setText(venue.getLocation().getState() + " " + venue.getLocation().getCountry());
         }
 
         if (venue.getPhotos() != null && venue.getPhotos().length > 0 && !TextUtils.isEmpty(venue.getPhotos()[0].getUrl())) {
