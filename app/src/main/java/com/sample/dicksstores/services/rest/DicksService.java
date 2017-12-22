@@ -2,8 +2,6 @@ package com.sample.dicksstores.services.rest;
 
 import com.sample.dicksstores.model.Response;
 
-import java.util.List;
-
 import retrofit.Callback;
 import retrofit.http.GET;
 
@@ -13,6 +11,6 @@ import retrofit.http.GET;
 public interface DicksService {
 
     @GET("/api/venue")
-    void getStores(Callback<List<Response>> callBack);
+    void getStores(Callback<Response> callBack);
 
 }
