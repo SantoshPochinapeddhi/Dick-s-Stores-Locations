@@ -6,7 +6,9 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -56,9 +58,15 @@ public class StoreDetailsActivity extends AppCompatActivity {
 
         Venues venue = getVenueFromIntent();
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        TextView toolbarTitle = ((TextView) findViewById(R.id.toolbar_title));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (venue.getName() != null) {
             name.setText(venue.getName());
+            toolbarTitle.setText(venue.getName());
         }
 
         if (venue.getLocation() != null) {
@@ -130,5 +138,13 @@ public class StoreDetailsActivity extends AppCompatActivity {
         twitter = findViewById(R.id.twitter);
         fb = findViewById(R.id.fb);
         rating = findViewById(R.id.rating);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
