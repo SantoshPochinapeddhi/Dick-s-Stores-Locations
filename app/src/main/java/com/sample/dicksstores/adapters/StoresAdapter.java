@@ -13,6 +13,7 @@ import com.sample.dicksstores.R;
 import com.sample.dicksstores.activities.StoreDetailsActivity;
 import com.sample.dicksstores.model.Venues;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
 
     private static final String STORE_DETAILS = "store_details";
 
-    private List<Venues> venues;
+    private List<Venues> venues = new ArrayList<>();
 
     private Context context;
 
