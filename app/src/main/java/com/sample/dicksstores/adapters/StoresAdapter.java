@@ -2,6 +2,8 @@ package com.sample.dicksstores.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.sample.dicksstores.R;
 import com.sample.dicksstores.activities.StoreDetailsActivity;
 import com.sample.dicksstores.model.Venues;
@@ -43,19 +47,46 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.name.setText(venues.get(position).getName());
-        holder.location.setText(venues.get(position).getLocation().getAddress());
-
-        holder.getView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, StoreDetailsActivity.class);
-                intent.putExtra(STORE_DETAILS, venues.get(position));
-                context.startActivity(intent);
-                ((AppCompatActivity) context).overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final Venues venue = venues.get(position);
+        if (venue != null) {
+            final SharedPreferences prefObj = PreferenceManager.getDefaultSharedPreferences(context);
+            holder.name.setText(venues.get(position).getName());
+            if (venue.getLocation() != null) {
+                holder.location.setText(venues.get(position).getLocation().getAddress());
+                holder.city.setText(venues.get(position).getLocation().getCity() + " - " + venues.get(position).getLocation().getPostalCode());
+                holder.state.setText(venues.get(position).getLocation().getState() + " " + venues.get(position).getLocation().getAddress());
             }
-        });
+
+            holder.getView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, StoreDetailsActivity.class);
+                    intent.putExtra(STORE_DETAILS, venues.get(position));
+                    context.startActivity(intent);
+                    ((AppCompatActivity) context).overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+                }
+            });
+
+            holder.getLikeBtn().setOnLikeListener(new OnLikeListener() {
+                @Override
+                public void liked(LikeButton likeButton) {
+                    holder.likeBtn.setLiked(true);
+                    SharedPreferences.Editor editor = prefObj.edit();
+                    editor.putBoolean(venue.getId() + "", true).commit();
+                }
+
+                @Override
+                public void unLiked(LikeButton likeButton) {
+                    holder.likeBtn.setLiked(false);
+                    SharedPreferences.Editor editor = prefObj.edit();
+                    editor.putBoolean(venue.getId() + "", false).commit();
+                }
+            });
+
+            holder.likeBtn.setLiked(prefObj.getBoolean(venue.getId() + "", false));
+
+        }
     }
 
     @Override
@@ -71,9 +102,8 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
         private TextView location;
         private TextView name;
         private TextView city;
-        private TextView pin;
         private TextView state;
-        private TextView country;
+        private LikeButton likeBtn;
 
         private View view;
 
@@ -83,13 +113,16 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
             name = (TextView) itemView.findViewById(R.id.name_txt);
             location = (TextView) itemView.findViewById(R.id.location_txt);
             city = (TextView) itemView.findViewById(R.id.city_txt);
-            pin = (TextView) itemView.findViewById(R.id.pin_txt);
             state = (TextView) itemView.findViewById(R.id.state_txt);
-            country = (TextView) itemView.findViewById(R.id.country_txt);
+            likeBtn = (LikeButton) itemView.findViewById(R.id.like_btn);
         }
 
         public View getView() {
             return view;
+        }
+
+        public LikeButton getLikeBtn() {
+            return likeBtn;
         }
     }
 
