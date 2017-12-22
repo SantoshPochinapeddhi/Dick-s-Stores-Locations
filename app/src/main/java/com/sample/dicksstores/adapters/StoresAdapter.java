@@ -55,7 +55,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
             if (venue.getLocation() != null) {
                 holder.location.setText(venues.get(position).getLocation().getAddress());
                 holder.city.setText(venues.get(position).getLocation().getCity() + " - " + venues.get(position).getLocation().getPostalCode());
-                holder.state.setText(venues.get(position).getLocation().getState() + " " + venues.get(position).getLocation().getAddress());
+                holder.state.setText(venues.get(position).getLocation().getState() + " " + venues.get(position).getLocation().getCountry());
             }
 
             holder.getView().setOnClickListener(new View.OnClickListener() {
