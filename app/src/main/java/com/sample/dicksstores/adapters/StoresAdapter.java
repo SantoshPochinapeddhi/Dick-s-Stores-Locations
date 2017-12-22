@@ -26,7 +26,7 @@ import java.util.List;
 
 public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder> {
 
-    private static final String STORE_DETAILS = "store_details";
+    public static final String STORE_DETAILS = "store_details";
 
     private List<Venues> venues = new ArrayList<>();
 
