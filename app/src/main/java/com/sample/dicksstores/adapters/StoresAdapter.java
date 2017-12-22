@@ -51,6 +51,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
         final Venues venue = venues.get(position);
         if (venue != null) {
             final SharedPreferences prefObj = PreferenceManager.getDefaultSharedPreferences(context);
+            final SharedPreferences.Editor editor = prefObj.edit();
             holder.name.setText(venues.get(position).getName());
             if (venue.getLocation() != null) {
                 holder.location.setText(venues.get(position).getLocation().getAddress());
@@ -72,19 +73,21 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.ViewHolder
                 @Override
                 public void liked(LikeButton likeButton) {
                     holder.likeBtn.setLiked(true);
-                    SharedPreferences.Editor editor = prefObj.edit();
-                    editor.putBoolean(venue.getId() + "", true).commit();
+                    editor.putString("liked", venue.getId()+"").commit();
                 }
 
                 @Override
                 public void unLiked(LikeButton likeButton) {
                     holder.likeBtn.setLiked(false);
-                    SharedPreferences.Editor editor = prefObj.edit();
-                    editor.putBoolean(venue.getId() + "", false).commit();
+                    if(venue.getId().equals(prefObj.getString("linked",""))) {
+                        editor.putString("liked", "").commit();
+                    }
                 }
             });
 
-            holder.likeBtn.setLiked(prefObj.getBoolean(venue.getId() + "", false));
+            if(venue.getId().equals(prefObj.getString("liked",""))) {
+                holder.likeBtn.setLiked(true);
+            }
 
         }
     }
