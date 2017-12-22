@@ -6,4 +6,6 @@
     <string name="phone">Phone</string>
     <string name="facebook">Facebook</string>
     <string name="twitter">Twitter</string>
+    <string name="verified">This store has been verified</string>
+    <string name="not_verified">This store has not been verified</string>
 </resources>
