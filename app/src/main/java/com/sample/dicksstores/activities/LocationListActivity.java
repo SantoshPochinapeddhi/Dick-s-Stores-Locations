@@ -59,11 +59,10 @@ public class LocationListActivity extends AppCompatActivity {
 
     private void loadListWithStores(Venues[] venues) {
         List<Venues> venuesList = Arrays.asList(venues);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(LocationListActivity.this);
-        mRecyclerView.setLayoutManager(layoutManager);
         StoresAdapter adapter = new StoresAdapter(LocationListActivity.this);
         adapter.addAllItems(venuesList);
         mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(LocationListActivity.this));
         UIDialog.dismissDialog(LocationListActivity.this);
     }
 }
