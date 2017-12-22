@@ -1,7 +1,8 @@
 package com.sample.dicksstores.model;
 
-public class Contacts
-{
+import java.io.Serializable;
+
+public class Contacts implements Serializable {
     private String twitter;
 
     private String phone;
@@ -10,49 +11,40 @@ public class Contacts
 
     private String facebook;
 
-    public String getTwitter ()
-    {
+    public String getTwitter() {
         return twitter;
     }
 
-    public void setTwitter (String twitter)
-    {
+    public void setTwitter(String twitter) {
         this.twitter = twitter;
     }
 
-    public String getPhone ()
-    {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone (String phone)
-    {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getFacebookName ()
-    {
+    public String getFacebookName() {
         return facebookName;
     }
 
-    public void setFacebookName (String facebookName)
-    {
+    public void setFacebookName(String facebookName) {
         this.facebookName = facebookName;
     }
 
-    public String getFacebook ()
-    {
+    public String getFacebook() {
         return facebook;
     }
 
-    public void setFacebook (String facebook)
-    {
+    public void setFacebook(String facebook) {
         this.facebook = facebook;
     }
 
     @Override
-    public String toString()
-    {
-        return "ClassPojo [twitter = "+twitter+", phone = "+phone+", facebookName = "+facebookName+", facebook = "+facebook+"]";
+    public String toString() {
+        return "ClassPojo [twitter = " + twitter + ", phone = " + phone + ", facebookName = " + facebookName + ", facebook = " + facebook + "]";
     }
 }
